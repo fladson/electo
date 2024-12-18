@@ -101,4 +101,19 @@ defmodule Electo.Things do
   def change_thing(%Thing{} = thing, attrs \\ %{}) do
     Thing.changeset(thing, attrs)
   end
+
+  @doc """
+  Increments the vote count for a thing.
+
+  ## Examples
+
+      iex> increment_vote(thing)
+      {:ok, %Thing{}}
+
+  """
+  def increment_vote(%Thing{} = thing) do
+    thing
+    |> Thing.changeset(%{votes: thing.votes + 1})
+    |> Repo.update()
+  end
 end

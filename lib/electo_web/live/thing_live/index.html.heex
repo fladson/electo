@@ -28,6 +28,11 @@
       Delete
     </.link>
   </:action>
+  <:action :let={{_id, thing}}>
+    <.link phx-click={JS.push("vote", value: %{id: thing.id})}>
+      Vote
+    </.link>
+  </:action>
 </.table>
 
 <.modal :if={@live_action in [:new, :edit]} id="thing-modal" show on_cancel={JS.patch(~p"/things")}>

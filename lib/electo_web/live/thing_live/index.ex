@@ -44,4 +44,10 @@ defmodule ElectoWeb.ThingLive.Index do
 
     {:noreply, stream_delete(socket, :things, thing)}
   end
+
+  def handle_event("vote", %{"id" => id}, socket) do
+    thing = Things.get_thing!(id)
+    {:ok, updated_thing} = Things.increment_vote(thing)
+    {:noreply, stream_insert(socket, :things, updated_thing)}
+  end
 end

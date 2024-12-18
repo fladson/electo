@@ -20,7 +20,6 @@ defmodule ElectoWeb.ThingLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:votes]} type="number" label="Votes" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Thing</.button>
         </:actions>

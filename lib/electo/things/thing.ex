@@ -4,7 +4,7 @@ defmodule Electo.Things.Thing do
 
   schema "things" do
     field :name, :string
-    field :votes, :integer
+    field :votes, :integer, default: 0
 
     timestamps(type: :utc_datetime)
   end

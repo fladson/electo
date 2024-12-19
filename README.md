@@ -1,5 +1,9 @@
 # Electo
 
+Elixir, Phoenix and LiveView explorations.
+
+<img src="demo.gif" autoplay loop muted style="max-width: 100%;">
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies

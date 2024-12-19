@@ -119,5 +119,17 @@ defmodule Electo.Things do
     thing
     |> Thing.changeset(%{votes: thing.votes + 1})
     |> Repo.update()
+    |> broadcast(:thing_voted)
+  end
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(Electo.PubSub, "things")
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+
+  defp broadcast({:ok, thing}, event) do
+    Phoenix.PubSub.broadcast(Electo.PubSub, "things", {event, thing})
+    {:ok, thing}
   end
 end

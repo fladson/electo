@@ -12,13 +12,17 @@ defmodule ElectoWeb.HomeLive do
 
   @impl true
   def handle_event("vote", %{"id" => id}, socket) do
-    thing = Things.get_thing!(id)
-    {:ok, updated_thing} = Things.increment_vote(thing)
-    {:noreply, stream_insert(socket, :things, updated_thing)}
+    Things.get_thing!(id)
+    |> Things.increment_vote()
+
+    # Let the broadcast handle the stream update
+    {:noreply, socket}
   end
 
   @impl true
-  def handle_info({:thing_voted, thing}, socket) do
-    {:noreply, stream_insert(socket, :things, thing)}
+  def handle_info({:thing_voted, _thing}, socket) do
+    # Refresh entire stream with new order when any vote happens
+    # not the most efficient but it's simple and works
+    {:noreply, stream(socket, :things, Things.list_things_ordered(), reset: true)}
   end
 end

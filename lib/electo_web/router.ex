@@ -17,8 +17,7 @@ defmodule ElectoWeb.Router do
   scope "/", ElectoWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-
+    live "/", HomeLive, :index
     live "/things", ThingLive.Index, :index
     live "/things/new", ThingLive.Index, :new
     live "/things/:id/edit", ThingLive.Index, :edit

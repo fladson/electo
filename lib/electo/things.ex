@@ -21,6 +21,10 @@ defmodule Electo.Things do
     Repo.all(Thing)
   end
 
+  def list_things_ordered do
+    Repo.all(from t in Thing, order_by: [desc: t.votes])
+  end
+
   @doc """
   Gets a single thing.
 

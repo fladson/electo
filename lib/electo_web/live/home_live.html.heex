@@ -1,0 +1,24 @@
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
+  phx-update="stream"
+  id="things"
+>
+  <%= for {id, thing} <- @streams.things do %>
+    <div id={id} class="p-6 rounded-lg border-2 border-gray-200 hover:border-gray-300">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-semibold text-gray-800">{thing.name}</h3>
+        <span class="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-sm font-medium text-blue-700">
+          {thing.votes} votes
+        </span>
+      </div>
+      <div class="flex justify-end">
+        <button
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+          phx-click={JS.push("vote", value: %{id: thing.id})}
+        >
+          Vote
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>
